@@ -1,0 +1,10 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: false
+    avoid_relative_lib_imports: true
+    avoid_types_as_parameter_names: true
+    prefer_relative_imports: true
+    prefer_void_to_null: true
+    unawaited_futures: true
