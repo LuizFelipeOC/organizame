@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../widgets/elevated_button_widget.dart';
 import '../../widgets/icon_elevated_button_widget.dart';
@@ -87,7 +88,10 @@ class _LoginPageState extends State<LoginPage> {
                               text: "Don't have an account ?  ",
                               children: [
                                 TextSpan(
-                                  recognizer: TapGestureRecognizer()..onTap = () => {},
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      context.go('/register');
+                                    },
                                   text: 'Sign up',
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
