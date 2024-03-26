@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../widgets/custom_app_bar.dart';
 import '../../widgets/elevated_button_widget.dart';
 import '../../widgets/icon_elevated_button_widget.dart';
 import '../../widgets/label_text_form_field.dart';
@@ -21,14 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 80, left: 15, right: 15, bottom: 10),
-            child: Text(
-              'Log In',
-              style: Theme.of(context).textTheme.headlineLarge,
-              textAlign: TextAlign.start,
-            ),
-          ),
+          const CustomAppBar(title: 'Log in'),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.only(
@@ -90,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                                 TextSpan(
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      context.go('/register');
+                                      context.push('/register');
                                     },
                                   text: 'Sign up',
                                   style: Theme.of(context).textTheme.labelLarge,
