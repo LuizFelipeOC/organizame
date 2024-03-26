@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.6
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +29,9 @@ flutter:
 
   fonts:
    - family: Inter
- #    fonts:
-       # - asset: fonts/Schyler-Regular.ttf
+     fonts:
+       - asset: assets/fonts/Inter-Bold.ttf
+       - asset: assets/fonts/Inter-ExtraBold.ttf
+       - asset: assets/fonts/Inter-Light.ttf
+       - asset: assets/fonts/Inter-Regular.ttf
 
