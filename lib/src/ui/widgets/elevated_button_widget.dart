@@ -19,6 +19,7 @@ class ElevatedButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(10),
       onTap: callback,
       child: Container(
         height: height,
@@ -34,7 +35,7 @@ class ElevatedButtonWidget extends StatelessWidget {
           ),
         ),
         child: Text(
-         title,
+          title,
           style: Theme.of(context).textTheme.labelLarge,
           textAlign: TextAlign.center,
         ),
