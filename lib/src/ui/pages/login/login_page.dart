@@ -93,6 +93,13 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Forgot password',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          )
                         ],
                       ),
                     ),
