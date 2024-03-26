@@ -9,7 +9,15 @@ class DarkTheme {
         scaffoldBackgroundColor: AppColors.blackColor,
         textTheme: _textTheme(),
         inputDecorationTheme: _inputDecoration(),
+        iconTheme: _iconThemeData(),
       );
+
+  IconThemeData _iconThemeData() {
+    return const IconThemeData(
+      color: AppColors.white,
+      size: 22,
+    );
+  }
 
   TextTheme _textTheme() {
     return const TextTheme(
