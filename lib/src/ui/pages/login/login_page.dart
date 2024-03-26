@@ -94,7 +94,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 20),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.push('/forgot-password');
+                            },
                             child: Text(
                               'Forgot password',
                               style: Theme.of(context).textTheme.labelMedium,
