@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../app_colors.dart';
 import '../../widgets/elevated_button_widget.dart';
+import '../../widgets/icon_elevated_button_widget.dart';
 import '../../widgets/label_text_form_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -46,23 +47,10 @@ class _LoginPageState extends State<LoginPage> {
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 20),
-                      GestureDetector(
-                        onTap: () => {},
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.white,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            'Google',
-                            style: Theme.of(context).textTheme.labelLarge,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
+                      IconElevatedButon(
+                        icon: FontAwesomeIcons.google,
+                        text: 'Google',
+                        callback: () {},
                       )
                     ],
                   ),
