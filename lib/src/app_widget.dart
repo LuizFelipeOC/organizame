@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'routes/routes.dart';
+import 'themes/app_themes.dart';
+
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
 
@@ -10,8 +13,10 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      theme: AppThemes.theme,
+      routerConfig: AppRoutes.routes,
     );
   }
 }
