@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'data/services/firebase/initialize_firebase.dart';
 import 'routes/routes.dart';
 import 'themes/app_themes.dart';
 
@@ -11,6 +12,15 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
+  FirebaseApp firebaseApp = FirebaseApp();
+
+  @override
+  void initState() {
+    firebaseApp.initializeApp();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
