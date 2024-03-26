@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'data/services/firebase/initialize_firebase.dart';
+import 'data/services/supabase/init_supabase.dart';
 import 'routes/routes.dart';
 import 'themes/app_themes.dart';
 
@@ -12,11 +12,11 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-  FirebaseApp firebaseApp = FirebaseApp();
+  final InitSupabase supabase = InitSupabase();
 
   @override
   void initState() {
-    firebaseApp.initializeApp();
+    supabase.intiSupabase();
 
     super.initState();
   }
