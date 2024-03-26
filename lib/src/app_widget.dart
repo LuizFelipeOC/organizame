@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'data/services/supabase/init_supabase.dart';
+import 'get_it/get_it.dart';
 import 'routes/routes.dart';
 import 'themes/app_themes.dart';
 
@@ -12,11 +12,9 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-  final InitSupabase supabase = InitSupabase();
-
   @override
   void initState() {
-    supabase.intiSupabase();
+    registerService();
 
     super.initState();
   }
