@@ -12,5 +12,7 @@ class AppColors {
 
   static const Color pinkPrimary = Color(0xFFD929BB);
 
-  static const Color red = Colors.red;
+  static const Color red = Color(0xffb01923);
+
+  static const Color green = Color(0xff01700a);
 }
