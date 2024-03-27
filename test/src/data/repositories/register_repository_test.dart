@@ -25,51 +25,77 @@ void main() {
         repository = RegisterRepository(authentication: authentication),
       });
 
-  test('Should test when occur auth exception', () async {
-    when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
-      const AuthException('dynamic message returned of supabase', statusCode: "429"),
-    );
+  group('Should test auth exception', () {
+    test('on rate limit email verify', () async {
+      when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
+        const AuthException('dynamic message returned of supabase', statusCode: "429"),
+      );
 
-    final sut = await repository.create(credentials: userCredential);
+      final sut = await repository.create(credentials: userCredential);
 
-    sut.onFailure((failure) {
-      expect(failure, RegisterAccountFailures.rateLimitAccess);
+      sut.onFailure((failure) {
+        expect(failure, RegisterAccountFailures.rateLimitAccess);
+      });
+    });
+
+    test('on invalid e-mail format', () async {
+      when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
+        const AuthException('Unable to validate email address: invalid format', statusCode: "422"),
+      );
+
+      final sut = await repository.create(credentials: userCredential);
+
+      sut.onFailure((failure) {
+        expect(failure, RegisterAccountFailures.invalidEmail);
+      });
+    });
+
+    test('on invalid length password', () async {
+      when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
+        const AuthException('Password should be at least 6 characters.', statusCode: "422"),
+      );
+
+      final sut = await repository.create(credentials: userCredential);
+
+      sut.onFailure((failure) {
+        expect(failure, RegisterAccountFailures.invalidPassword);
+      });
+    });
+
+    test('on already exist account', () async {
+      when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
+        const AuthException('User already registered', statusCode: "400"),
+      );
+
+      final sut = await repository.create(credentials: userCredential);
+
+      sut.onFailure((failure) {
+        expect(failure, RegisterAccountFailures.emailAlreadyExist);
+      });
+    });
+
+    test('on others supabase not mapped errors', () async {
+      when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
+        const AuthException('Other errors.', statusCode: "500"),
+      );
+
+      final sut = await repository.create(credentials: userCredential);
+
+      sut.onFailure((failure) {
+        expect(failure, RegisterAccountFailures.unknownError);
+      });
     });
   });
 
-  test('Should test when occur invalid email format', () async {
+  test('Should test others code exception', () async {
     when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
-      const AuthException('Unable to validate email address: invalid format', statusCode: "422"),
+      Exception('Anywhere exceptions.'),
     );
 
     final sut = await repository.create(credentials: userCredential);
 
     sut.onFailure((failure) {
-      expect(failure, RegisterAccountFailures.invalidEmail);
-    });
-  });
-
-  test('Should test when occur auth exception', () async {
-    when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
-      const AuthException('Password should be at least 6 characters.', statusCode: "422"),
-    );
-
-    final sut = await repository.create(credentials: userCredential);
-
-    sut.onFailure((failure) {
-      expect(failure, RegisterAccountFailures.invalidPassword);
-    });
-  });
-
-  test('Should test when occur auth exception', () async {
-    when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
-      const AuthException('User already registered', statusCode: "400"),
-    );
-
-    final sut = await repository.create(credentials: userCredential);
-
-    sut.onFailure((failure) {
-      expect(failure, RegisterAccountFailures.emailAlreadyExist);
+      expect(failure, RegisterAccountFailures.unknownError);
     });
   });
 }
