@@ -98,4 +98,22 @@ void main() {
       expect(failure, RegisterAccountFailures.unknownError);
     });
   });
+
+  test('Should test success create account', () async {
+    when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenAnswer((_) async {
+      return AuthResponse(
+        session: Session(
+          accessToken: 'access_token',
+          tokenType: 'jwt',
+          user: const User(id: 'test', appMetadata: {}, aud: 'test', createdAt: '', userMetadata: {}),
+        ),
+      );
+    });
+
+    final sut = await repository.create(credentials: userCredential);
+
+    sut.onSuccess((success) {
+      expect(success.accessToken, 'access_token');
+    });
+  });
 }
