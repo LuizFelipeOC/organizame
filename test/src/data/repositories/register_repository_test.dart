@@ -60,4 +60,16 @@ void main() {
       expect(failure, RegisterAccountFailures.invalidPassword);
     });
   });
+
+  test('Should test when occur auth exception', () async {
+    when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
+      const AuthException('User already registered', statusCode: "400"),
+    );
+
+    final sut = await repository.create(credentials: userCredential);
+
+    sut.onFailure((failure) {
+      expect(failure, RegisterAccountFailures.emailAlreadyExist);
+    });
+  });
 }
