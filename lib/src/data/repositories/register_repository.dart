@@ -29,8 +29,12 @@ class RegisterRepository {
         return const Failure(RegisterAccountFailures.invalidEmail);
       }
 
-      if (authErr.statusCode == "422" && authErr.message == '') {
+      if (authErr.statusCode == "422" && authErr.message == 'Password should be at least 6 characters.') {
         return const Failure(RegisterAccountFailures.invalidPassword);
+      }
+
+      if (authErr.statusCode == "400" && authErr.message == 'User already registered') {
+        return const Failure(RegisterAccountFailures.emailAlreadyExist);
       }
 
       return const Failure(RegisterAccountFailures.unknownError);

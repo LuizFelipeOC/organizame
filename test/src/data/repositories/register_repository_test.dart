@@ -37,7 +37,7 @@ void main() {
     });
   });
 
-  test('Should test when occur auth exception', () async {
+  test('Should test when occur invalid email format', () async {
     when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
       const AuthException('Unable to validate email address: invalid format', statusCode: "422"),
     );
@@ -46,6 +46,18 @@ void main() {
 
     sut.onFailure((failure) {
       expect(failure, RegisterAccountFailures.invalidEmail);
+    });
+  });
+
+  test('Should test when occur auth exception', () async {
+    when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
+      const AuthException('Password should be at least 6 characters.', statusCode: "422"),
+    );
+
+    final sut = await repository.create(credentials: userCredential);
+
+    sut.onFailure((failure) {
+      expect(failure, RegisterAccountFailures.invalidPassword);
     });
   });
 }

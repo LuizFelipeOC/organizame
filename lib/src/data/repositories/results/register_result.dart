@@ -3,6 +3,7 @@ enum RegisterAccountFailures {
   invalidPassword,
   unknownError,
   rateLimitAccess,
+  emailAlreadyExist,
 }
 
 class RegisterSuccessResult {
