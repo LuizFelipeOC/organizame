@@ -39,6 +39,7 @@ class RegisterRepository {
 
       return const Failure(RegisterAccountFailures.unknownError);
     } catch (e) {
+      debugPrint(e.toString());
       return const Failure(RegisterAccountFailures.unknownError);
     }
   }
