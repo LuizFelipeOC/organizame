@@ -36,6 +36,16 @@ void main() {
       expect(failure, RegisterAccountFailures.rateLimitAccess);
     });
   });
-}
 
-//"flutter: 422 - Unable to validate email address: invalid format"
+  test('Should test when occur auth exception', () async {
+    when(() => authentication.signUp(email: userCredential.email, password: userCredential.password)).thenThrow(
+      const AuthException('Unable to validate email address: invalid format', statusCode: "422"),
+    );
+
+    final sut = await repository.create(credentials: userCredential);
+
+    sut.onFailure((failure) {
+      expect(failure, RegisterAccountFailures.invalidEmail);
+    });
+  });
+}

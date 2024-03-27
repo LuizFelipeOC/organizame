@@ -25,7 +25,7 @@ class RegisterRepository {
         return const Failure(RegisterAccountFailures.rateLimitAccess);
       }
 
-      if (authErr.statusCode == "422" && authErr.message == '') {
+      if (authErr.statusCode == "422" && authErr.message == 'Unable to validate email address: invalid format') {
         return const Failure(RegisterAccountFailures.invalidEmail);
       }
 
