@@ -54,6 +54,20 @@ class DarkTheme {
         borderRadius: BorderRadius.circular(10),
         borderSide: const BorderSide(color: AppColors.purpleSecondary),
       ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: AppColors.red, width: 0.4),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: AppColors.red, width: 0.5),
+      ),
+      errorStyle: const TextStyle(
+        color: AppColors.red,
+        fontSize: 12,
+        fontWeight: FontWeight.normal,
+      ),
+      errorMaxLines: 2,
       hintStyle: const TextStyle(
         color: AppColors.grey,
         fontSize: 16,
