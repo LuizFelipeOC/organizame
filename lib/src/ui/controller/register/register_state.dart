@@ -6,4 +6,6 @@ class LoadingRegisterState extends RegisterState {}
 
 class ErrorRegisterState extends RegisterState {}
 
+class EmailAlreadyExistRegisterState extends RegisterState {}
+
 class SuccessRegisterState extends RegisterState {}
