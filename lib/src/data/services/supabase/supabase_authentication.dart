@@ -13,6 +13,10 @@ class SupabaseAuthentication {
     );
   }
 
+  Future<AuthResponse> login({required String email, required String password}) async {
+    return await client.auth.signInWithPassword(password: password, email: email);
+  }
+
   Future<void> resetPassword({required String email}) async {
     return await client.auth.resetPasswordForEmail(email);
   }

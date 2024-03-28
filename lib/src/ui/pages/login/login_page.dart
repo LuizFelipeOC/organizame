@@ -3,10 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app_colors.dart';
+import '../../../app_widget.dart';
+import '../../../get_it/get_it.dart';
+import '../../../validators/email_validator.dart';
+import '../../controller/login/login_controller.dart';
+import '../../controller/login/login_result.dart';
 import '../../widgets/custom_app_bar.dart';
+import '../../widgets/custom_snack_bar.dart';
 import '../../widgets/elevated_button_widget.dart';
 import '../../widgets/icon_elevated_button_widget.dart';
 import '../../widgets/label_text_form_field.dart';
+import '../../widgets/loading_effect_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,6 +24,48 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _controller = getIt.get<LoginController>();
+
+  @override
+  void initState() {
+    _controller.addListener(() {
+      if (_controller.value is LoadingLoginState) {
+        showDialog(
+          barrierDismissible: true,
+          context: context,
+          builder: (_) => const LoadingEffectWidget(message: ''),
+        );
+      }
+
+      if (_controller.value is InvalidCredentials) {
+        context.pop();
+
+        scaffoldMessenger.currentState!.showSnackBar(
+          const CustomSnackBar(
+            color: AppColors.red,
+            content: Text('Email or Password is invalid.'),
+          ),
+        );
+      }
+
+      if (_controller.value is ErrorLoginCredentials) {
+        context.pop();
+
+        scaffoldMessenger.currentState!.showSnackBar(
+          const CustomSnackBar(
+            color: AppColors.red,
+            content: Text('Occur an internal error, try again later.'),
+          ),
+        );
+      }
+
+      if (_controller.value is SuccessLoginState) {
+        context.push('/home');
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,29 +102,49 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 50, left: 5, right: 5),
                     child: Form(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      key: _controller.formController,
                       child: Column(
                         children: [
                           LabelTextFormField(
-                            buildContext: context,
-                            label: 'E-mail',
-                            textHint: 'Input your email',
-                            callBackValidator: (String? value) => null,
-                          ),
+                              controller: _controller.emailController,
+                              buildContext: context,
+                              label: 'E-mail',
+                              textHint: 'Input your email',
+                              callBackValidator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'The email field is required';
+                                }
+
+                                if (!EmailValidator.emailValidator(value)) {
+                                  return 'The format of email is invalid';
+                                }
+
+                                return null;
+                              }),
                           const SizedBox(height: 20),
                           LabelTextFormField(
-                            buildContext: context,
-                            label: 'Password',
-                            textHint: 'Input your password',
-                            callBackValidator: (String? value) => null,
-                            isObscureText: true,
-                          ),
+                              controller: _controller.passwordController,
+                              buildContext: context,
+                              label: 'Password',
+                              textHint: 'Input your password',
+                              isObscureText: true,
+                              callBackValidator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'The password field is required';
+                                }
+
+                                return null;
+                              }),
                           const SizedBox(height: 10),
                           ElevatedButtonWidget(
                             width: MediaQuery.of(context).size.width,
                             height: 52,
                             title: 'Log in',
-                            callback: () {},
+                            callback: () async {
+                              FocusScope.of(context).unfocus();
+
+                              await _controller.login();
+                            },
                           ),
                           const SizedBox(height: 20),
                           Text.rich(
