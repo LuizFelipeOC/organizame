@@ -8,6 +8,7 @@ class CustomAppBar extends StatelessWidget {
   final String title;
   final IconData? icon;
   final VoidCallback? callback;
+  final EdgeInsetsGeometry? padding;
 
   const CustomAppBar({
     super.key,
@@ -15,12 +16,13 @@ class CustomAppBar extends StatelessWidget {
     required this.title,
     this.icon,
     this.callback,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 80, left: 15, right: 15, bottom: 10),
+      padding: padding ?? const EdgeInsets.only(top: 80, left: 15, right: 15, bottom: 10),
       child: Row(
         children: [
           leading

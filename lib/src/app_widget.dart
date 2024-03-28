@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'data/services/firebase/initialize_firebase.dart';
+import 'get_it/get_it.dart';
 import 'routes/routes.dart';
 import 'themes/app_themes.dart';
+
+GlobalKey<ScaffoldMessengerState> scaffoldMessenger = GlobalKey<ScaffoldMessengerState>();
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -12,11 +14,9 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-  FirebaseApp firebaseApp = FirebaseApp();
-
   @override
   void initState() {
-    firebaseApp.initializeApp();
+    registerService();
 
     super.initState();
   }
@@ -24,6 +24,7 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      scaffoldMessengerKey: scaffoldMessenger,
       debugShowCheckedModeBanner: false,
       theme: AppThemes.theme,
       routerConfig: AppRoutes.routes,

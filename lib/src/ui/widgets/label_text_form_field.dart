@@ -8,6 +8,7 @@ class LabelTextFormField extends StatelessWidget {
   final String? Function(String? value)? callBackValidator;
   final bool isObscureText;
   final BuildContext buildContext;
+  final TextEditingController? controller;
 
   const LabelTextFormField({
     super.key,
@@ -16,6 +17,7 @@ class LabelTextFormField extends StatelessWidget {
     this.callBackValidator,
     this.isObscureText = false,
     required this.buildContext,
+    this.controller,
   });
 
   @override
@@ -29,6 +31,7 @@ class LabelTextFormField extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         TextFormField(
+          controller: controller,
           scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(buildContext).viewInsets.bottom),
           obscureText: isObscureText,
           style: Theme.of(context).textTheme.labelMedium,
