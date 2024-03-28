@@ -12,4 +12,8 @@ class SupabaseAuthentication {
       data: {'email_confirm': '${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}'},
     );
   }
+
+  Future<void> resetPassword({required String email}) async {
+    return await client.auth.resetPasswordForEmail(email);
+  }
 }
