@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:organizame/src/data/repositories/forgot_password.dart';
+import 'package:organizame/src/data/repositories/results/forgot_password_result.dart';
 import 'package:organizame/src/data/services/supabase/supabase_authentication.dart';
 
 class SupaBaseAuthMock extends Mock implements SupabaseAuthentication {}

@@ -1,6 +1,7 @@
 import 'package:result_dart/result_dart.dart';
 
 import '../services/supabase/supabase_authentication.dart';
+import 'results/forgot_password_result.dart';
 
 class ForgotPasswordRepository {
   final SupabaseAuthentication authentication;
@@ -20,10 +21,4 @@ class ForgotPasswordRepository {
       return const Failure(FailureSendForgotPassword.accountNotExist);
     }
   }
-}
-
-class SuccessSendForgotPassword {}
-
-enum FailureSendForgotPassword {
-  accountNotExist,
 }
