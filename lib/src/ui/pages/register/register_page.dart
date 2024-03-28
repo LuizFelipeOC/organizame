@@ -9,9 +9,11 @@ import '../../../validators/email_validator.dart';
 import '../../controller/register/register_controller.dart';
 import '../../controller/register/register_state.dart';
 import '../../widgets/custom_app_bar.dart';
+import '../../widgets/custom_snack_bar.dart';
 import '../../widgets/elevated_button_widget.dart';
 import '../../widgets/label_text_form_field.dart';
 import '../../widgets/loading_effect_widget.dart';
+import '../../widgets/modal_privacy_policies.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -160,7 +162,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         text: "By accepting, you accept our\n",
                         children: [
                           TextSpan(
-                            recognizer: TapGestureRecognizer()..onTap = () {},
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (_) {
+                                    return const ModalPrivacyPolicies();
+                                  },
+                                );
+                              },
                             text: 'policy and privacy terms',
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
@@ -177,31 +188,4 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-}
-
-class CustomSnackBar extends SnackBar {
-  final Color? color;
-  final SnackBarBehavior? type;
-
-  const CustomSnackBar({
-    super.key,
-    required super.content,
-    this.color,
-    this.type,
-  });
-
-  @override
-  Color? get backgroundColor => color;
-
-  @override
-  SnackBarBehavior? get behavior => type ?? SnackBarBehavior.floating;
-
-  @override
-  ShapeBorder? get shape => RoundedRectangleBorder(borderRadius: BorderRadius.circular(8));
-
-  @override
-  EdgeInsetsGeometry? get padding => const EdgeInsets.symmetric(horizontal: 15, vertical: 15);
-
-  @override
-  EdgeInsetsGeometry? get margin => const EdgeInsets.symmetric(horizontal: 15, vertical: 15);
 }
