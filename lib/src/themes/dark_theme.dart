@@ -10,7 +10,15 @@ class DarkTheme {
         textTheme: _textTheme(),
         inputDecorationTheme: _inputDecoration(),
         iconTheme: _iconThemeData(),
+        bottomSheetTheme: _bottomSheetThemeData(),
       );
+
+  BottomSheetThemeData _bottomSheetThemeData() {
+    return BottomSheetThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      backgroundColor: AppColors.blackColor,
+    );
+  }
 
   IconThemeData _iconThemeData() {
     return const IconThemeData(
@@ -30,6 +38,11 @@ class DarkTheme {
         color: AppColors.grey,
         fontSize: 16,
         fontWeight: FontWeight.w500,
+      ),
+      bodySmall: TextStyle(
+        color: AppColors.grey,
+        fontSize: 14,
+        fontWeight: FontWeight.normal,
       ),
       labelLarge: TextStyle(
         color: AppColors.white,
