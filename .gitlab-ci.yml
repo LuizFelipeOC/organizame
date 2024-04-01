@@ -9,7 +9,7 @@ ci:
   script:
     - apt-get update
     - apt-get install -y curl
-    - install -y openjdk-11-jdk-headless 
+    - apt-get install -y openjdk-11-jdk-headless 
     - java -version 
     - echo "Installing Flutter"
     - curl -sL https://raw.githubusercontent.com/suborbital/flutter/master/install.sh | bash -s -- -v 3.19.1  # Update version as needed
