@@ -8,6 +8,8 @@ build:
     image: mobiledevops/flutter-sdk-image:3.19.4
     stage: ci
     script: 
+        - git config --global --add safe.directory /home/mobiledevops/.flutter-sdk
+
         - echo "Dart Repair"
         - dart pub cache clean
         
