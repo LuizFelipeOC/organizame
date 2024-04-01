@@ -1,29 +1,15 @@
 stages:
   - ci
   - cd
+  - build
 
 
-ci:
-  stage: ci
-  image: ubuntu:latest
-  script:
-    - apt-get update
-    - apt-get install -y curl
-    - apt-get install -y openjdk-11-jdk-headless 
-    - java -version 
-    - echo "Installing Flutter"
-    - curl -sL https://raw.githubusercontent.com/flutter/flutter/master/install.sh | bash -s -v 3.19.1
-    - echo "Deleting dependencies"
-    - flutter clean
-    - echo "Getting dependencies"
-    - flutter pub get
-    - echo "Running tests"
-    - flutter test
-    - echo "Building APK"
-    - flutter build apk --release --build-number=${CI_PIPELINE_ID}
-  artifacts:
-    paths:
-      - build/app/outputs/flutter-apk/app-release.apk
+build: 
+    image: mobiledevops/flutter-sdk-image:3.10.1
+    stage: ci
+    script: 
+        - echo "Running tests"
+        - flutter test
 
 cd:
   stage: cd
