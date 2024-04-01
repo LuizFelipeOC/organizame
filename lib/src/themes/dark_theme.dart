@@ -11,7 +11,14 @@ class DarkTheme {
         inputDecorationTheme: _inputDecoration(),
         iconTheme: _iconThemeData(),
         bottomSheetTheme: _bottomSheetThemeData(),
+        progressIndicatorTheme: _progressIndicatorThemeData(),
       );
+
+  ProgressIndicatorThemeData _progressIndicatorThemeData() {
+    return const ProgressIndicatorThemeData(
+      color: AppColors.white,
+    );
+  }
 
   BottomSheetThemeData _bottomSheetThemeData() {
     return BottomSheetThemeData(
