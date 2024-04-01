@@ -20,4 +20,8 @@ class SupabaseAuthentication {
   Future<void> resetPassword({required String email}) async {
     return await client.auth.resetPasswordForEmail(email);
   }
+
+  Session? checkUserAuthenticated() {
+    return client.auth.currentSession;
+  }
 }
