@@ -22,6 +22,9 @@ build:
         - echo "Running tests"
         - flutter test
 
+        - echo supabase KEY ${SUPABASE_KEY}
+        - echo supabase URL ${SUPABASE_URL}
+
 cd:
   stage: cd
   image: ubuntu:latest
@@ -44,3 +47,5 @@ cd:
 variables:
   FIREBASE_ANDROID_ID: $FIREBASE_ANDROID_ID
   FIREBASE_TOKEN:  $FIREBASE_TOKEN
+  SUPABASE_KEY: $SUPABASE_KEY
+  SUPABASE_URL: $SUPABASE_URL
