@@ -1,6 +1,12 @@
 stages:
+  - install 
   - ci
   - cd
+
+install:
+  image: alpine 
+  script:
+    - apk add --no-cache curl 
 
 ci:
   stage: ci
