@@ -3,6 +3,11 @@ stages:
   - cd
   - build
 
+variables:
+  FIREBASE_ANDROID_ID: $FIREBASE_ANDROID_ID
+  FIREBASE_TOKEN:  $FIREBASE_TOKEN
+  SUPABASE_KEY: $SUPABASE_KEY
+  SUPABASE_URL: $SUPABASE_URL
 
 build: 
     image: mobiledevops/flutter-sdk-image:3.19.4
@@ -22,8 +27,8 @@ build:
         - echo "Running tests"
         - flutter test
 
-        - echo supabase KEY '$SUPABASE_KEY'
-        - echo supabase URL '$SUPABASE_URL'
+        - echo supabase KEY $SUPABASE_KEY
+        - echo supabase URL $SUPABASE_URL
 
 cd:
   stage: cd
@@ -44,8 +49,4 @@ cd:
   only:
     - main
 
-variables:
-  FIREBASE_ANDROID_ID: $FIREBASE_ANDROID_ID
-  FIREBASE_TOKEN:  $FIREBASE_TOKEN
-  SUPABASE_KEY: $SUPABASE_KEY
-  SUPABASE_URL: $SUPABASE_URL
+
