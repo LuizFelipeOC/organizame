@@ -5,9 +5,15 @@ stages:
 
 
 build: 
-    image: mobiledevops/flutter-sdk-image:3.10.1
+    image: mobiledevops/flutter-sdk-image:3.19.1
     stage: ci
     script: 
+        - echo "Running Clean Packages"
+        - flutter clean
+        
+        - echo "Running Get Packages"
+        - flutter pub get
+
         - echo "Running tests"
         - flutter test
 
