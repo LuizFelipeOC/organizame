@@ -8,6 +8,9 @@ build:
     image: mobiledevops/flutter-sdk-image:3.19.4
     stage: ci
     script: 
+        - echo "Dart Repair"
+        - dart pub cache clean
+        
         - echo "Running Clean Packages"
         - flutter clean
         
