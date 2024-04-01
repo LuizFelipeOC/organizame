@@ -1,18 +1,15 @@
 stages:
-  - install 
   - ci
   - cd
 
-install:
-  image: alpine 
-  script:
-    - apk add --no-cache curl 
 
 ci:
   stage: ci
   image: ubuntu:latest
   script:
-    - apt-get update && apt-get install -y openjdk-11-jdk-headless
+    - apt-get update
+    - apt-get install curl
+    - install -y openjdk-11-jdk-headless 
     - java -version 
     - echo "Installing Flutter"
     - curl -sL https://raw.githubusercontent.com/suborbital/flutter/master/install.sh | bash -s -- -v 3.19.1  # Update version as needed
