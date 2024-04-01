@@ -22,8 +22,8 @@ build:
         - echo "Running tests"
         - flutter test
 
-        - echo supabase KEY $SUPABASE_KEY
-        - echo supabase URL $SUPABASE_URL
+        - echo supabase KEY ${{SUPABASE_KEY}}
+        - echo supabase URL ${{SUPABASE_URL}}
 
 cd:
   stage: cd
