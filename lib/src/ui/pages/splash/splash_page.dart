@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../get_it/get_it.dart';
 import '../../controller/splash/splash.dart';
+import '../../controller/splash/splash_state.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -16,14 +17,19 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void initState() {
-    _controller.checkUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.checkUser();
+    });
 
     _controller.addListener(() {
-      if (_controller.isAuthenticated == true) {
-        return context.pushReplacement('/home');
+      if (_controller.value is AuthenticatedSplashState) {
+        context.pushReplacement('/home');
+
+        return;
       }
 
-      return context.pushReplacement('/login');
+      context.pushReplacement('/login');
+      return;
     });
 
     super.initState();
