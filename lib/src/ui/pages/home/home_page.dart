@@ -29,11 +29,19 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Column(
         children: [
-          CustomAppBar(
-            title: 'Welcome',
-            leading: true,
-            icon: FontAwesomeIcons.userAstronaut,
-            callback: () => {},
+          ValueListenableBuilder(
+            valueListenable: _controller.projects,
+            builder: (_, value, __) {
+              return CustomAppBar(
+                title: 'Welcome',
+                leading: true,
+                icon: FontAwesomeIcons.userAstronaut,
+                callback: () => {},
+                suffix: value.isNotEmpty,
+                suffixIcon: FontAwesomeIcons.plus,
+                suffixCallback: () => context.push('/create-project'),
+              );
+            },
           ),
           ValueListenableBuilder(
             valueListenable: _controller.isLoading,
