@@ -12,7 +12,15 @@ class DarkTheme {
         iconTheme: _iconThemeData(),
         bottomSheetTheme: _bottomSheetThemeData(),
         progressIndicatorTheme: _progressIndicatorThemeData(),
+        cardTheme: _cardTheme(),
       );
+
+  CardTheme _cardTheme() {
+    return CardTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      color: AppColors.grey.withOpacity(0.2),
+    );
+  }
 
   ProgressIndicatorThemeData _progressIndicatorThemeData() {
     return const ProgressIndicatorThemeData(
