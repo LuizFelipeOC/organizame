@@ -57,7 +57,7 @@ class _FormCreateProjectPageState extends State<FormCreateProjectPage> {
             ),
           );
 
-          context.pop();
+          context.pop(true);
         }
       }
     });
