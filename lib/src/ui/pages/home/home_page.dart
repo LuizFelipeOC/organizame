@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../get_it/get_it.dart';
 import '../../controller/home/home_controller.dart';
@@ -67,7 +68,10 @@ class _HomePageState extends State<HomePage> {
                                 text: "Do you don't have projects created ? \n\n",
                                 children: [
                                   TextSpan(
-                                    recognizer: TapGestureRecognizer()..onTap = () {},
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        context.push('/create-project');
+                                      },
                                     text: 'Create now',
                                     style: Theme.of(context).textTheme.labelLarge,
                                   ),
