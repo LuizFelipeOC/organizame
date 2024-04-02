@@ -13,7 +13,9 @@ class HomeRepository {
 
   AsyncResult<SuccessGetProjects, FailureGetProjects> getProjecs() async {
     try {
-      final response = await client.client.from('PROJECTS').select('*').eq('userid', client.client.auth.currentSession!.user.id);
+      final user = client.client.auth.currentUser!.id;
+
+      final response = await client.client.from('PROJECTS').select('*').eq('user', user);
       return Success(SuccessGetProjects(projects: response.map((e) => ProjectModel.fromMap(e)).toList()));
     } on PostgrestException catch (e) {
       debugPrint(e.message);
