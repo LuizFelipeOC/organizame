@@ -5,7 +5,6 @@ class ProjectModel {
   String id;
   String alias;
   String description;
-  String color;
   String createdAt;
   String? updateAt;
   String status;
@@ -15,7 +14,6 @@ class ProjectModel {
     required this.id,
     required this.alias,
     required this.description,
-    required this.color,
     required this.createdAt,
     this.updateAt,
     required this.status,
@@ -24,14 +22,9 @@ class ProjectModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
       'alias': alias,
-      'description': description,
-      'color': color,
-      'created_at': createdAt,
-      'update_at': updateAt,
+      'descritpion': description,
       'status': status,
-      'userId': userId,
     };
   }
 
@@ -39,11 +32,10 @@ class ProjectModel {
     return ProjectModel(
       id: map['id'] as String,
       alias: map['alias'] as String,
-      description: map['description'] as String,
-      color: map['color'] as String,
+      description: map['descritpion'] as String,
       createdAt: map['created_at'] as String,
       updateAt: map['update_at'] != null ? map['update_at'] as String : null,
-      status: map['status'] as String,
+      status: map['status'] ?? '',
       userId: map['userId'] != null ? map['userId'] as String : null,
     );
   }
