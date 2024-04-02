@@ -5,17 +5,23 @@ import '../../app_colors.dart';
 
 class CustomAppBar extends StatelessWidget {
   final bool leading;
+  final bool suffix;
   final String title;
   final IconData? icon;
+  final IconData? suffixIcon;
   final VoidCallback? callback;
+  final VoidCallback? suffixCallback;
   final EdgeInsetsGeometry? padding;
 
   const CustomAppBar({
     super.key,
     this.leading = false,
+    this.suffix = false,
+    this.suffixIcon,
     required this.title,
     this.icon,
     this.callback,
+    this.suffixCallback,
     this.padding,
   });
 
@@ -46,6 +52,20 @@ class CustomAppBar extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
+          suffix ? const SizedBox(width: 10) : const SizedBox(),
+          suffix
+              ? GestureDetector(
+                  onTap: suffixCallback,
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.grey),
+                    ),
+                    child: Icon(suffixIcon ?? FontAwesomeIcons.chevronLeft),
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
     );
