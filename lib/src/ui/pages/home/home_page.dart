@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                   title: 'Welcome',
                   leading: true,
                   icon: FontAwesomeIcons.userAstronaut,
-                  callback: () => {},
+                  callback: () => context.push('/profile'),
                   suffix: value.isNotEmpty,
                   suffixIcon: FontAwesomeIcons.plus,
                   suffixCallback: () async {
