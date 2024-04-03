@@ -13,7 +13,29 @@ class DarkTheme {
         bottomSheetTheme: _bottomSheetThemeData(),
         progressIndicatorTheme: _progressIndicatorThemeData(),
         cardTheme: _cardTheme(),
+        listTileTheme: _listTileThemeData(),
       );
+
+  ListTileThemeData _listTileThemeData() {
+    return ListTileThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      titleAlignment: ListTileTitleAlignment.center,
+      minLeadingWidth: 24,
+      iconColor: AppColors.white,
+      titleTextStyle: const TextStyle(
+        color: AppColors.white,
+        fontSize: 16,
+        fontWeight: FontWeight.w800,
+      ),
+      subtitleTextStyle: const TextStyle(
+        color: AppColors.white,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+      ),
+      selectedColor: AppColors.white,
+      selectedTileColor: AppColors.grey,
+    );
+  }
 
   CardTheme _cardTheme() {
     return CardTheme(
