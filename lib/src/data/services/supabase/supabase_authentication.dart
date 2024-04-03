@@ -24,4 +24,8 @@ class SupabaseAuthentication {
   Session? checkUserAuthenticated() {
     return client.auth.currentSession;
   }
+
+  User? currentUser() {
+    return client.auth.currentUser;
+  }
 }
