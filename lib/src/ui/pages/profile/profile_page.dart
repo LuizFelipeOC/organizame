@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app_colors.dart';
+import '../../../get_it/get_it.dart';
+import '../../controller/profile/profile_controller.dart';
 import '../../widgets/custom_app_bar.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -13,7 +15,13 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool isSelected = true;
+  final controller = getIt.get<ProfileController>();
+
+  @override
+  void initState() {
+    controller.getUserMail();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +77,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Text('Username', style: Theme.of(context).textTheme.labelLarge),
-              const SizedBox(height: 5),
-              Text('example@example.com.br', style: Theme.of(context).textTheme.labelMedium),
+              ValueListenableBuilder(
+                valueListenable: controller.mail,
+                builder: (_, value, __) {
+                  return Text(value, style: Theme.of(context).textTheme.labelLarge);
+                },
+              )
             ],
           ),
           Expanded(

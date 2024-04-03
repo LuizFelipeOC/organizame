@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../data/repositories/forgot_password.dart';
 import '../data/repositories/home_repository.dart';
 import '../data/repositories/login_repository.dart';
+import '../data/repositories/profile.dart';
 import '../data/repositories/projects.dart';
 import '../data/repositories/register_repository.dart';
 import '../data/repositories/splash_repository.dart';
@@ -12,6 +13,7 @@ import '../data/services/supabase/supabase_postgress.dart';
 import '../ui/controller/forgot_password/forgot_password.dart';
 import '../ui/controller/home/home_controller.dart';
 import '../ui/controller/login/login_controller.dart';
+import '../ui/controller/profile/profile_controller.dart';
 import '../ui/controller/projects/projects_controller.dart';
 import '../ui/controller/register/register_controller.dart';
 import '../ui/controller/splash/splash.dart';
@@ -34,4 +36,6 @@ void registerService() {
   getIt.registerFactory<HomeController>(() => HomeController(repository: getIt.get<HomeRepository>()));
   getIt.registerFactory<ProjectsRepository>(() => ProjectsRepository(client: getIt.get<SupabasePostgress>()));
   getIt.registerFactory<ProjectController>(() => ProjectController(repository: getIt.get<ProjectsRepository>()));
+  getIt.registerFactory<ProfileRepository>(() => ProfileRepository(client: getIt.get<SupabaseAuthentication>()));
+  getIt.registerFactory<ProfileController>(() => ProfileController(repository: getIt.get<ProfileRepository>()));
 }
